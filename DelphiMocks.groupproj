@@ -3,9 +3,6 @@
         <ProjectGuid>{5B50C9A9-C667-497D-954F-FA8A2C43C41B}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Sample1.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Tests\Delphi.Mocks.Tests.dproj">
             <Dependencies/>
         </Projects>
@@ -17,15 +14,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="Sample1">
-        <MSBuild Projects="Sample1.dproj"/>
-    </Target>
-    <Target Name="Sample1:Clean">
-        <MSBuild Projects="Sample1.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Sample1:Make">
-        <MSBuild Projects="Sample1.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Delphi_Mocks_Tests">
         <MSBuild Projects="Tests\Delphi.Mocks.Tests.dproj"/>
     </Target>
@@ -36,22 +24,16 @@
         <MSBuild Projects="Tests\Delphi.Mocks.Tests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="Sample1;Delphi_Mocks_Tests"/>
+        <CallTarget Targets="Delphi_Mocks_Tests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Sample1:Clean;Delphi_Mocks_Tests:Clean"/>
+        <CallTarget Targets="Delphi_Mocks_Tests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Sample1:Make;Delphi_Mocks_Tests:Make"/>
+        <CallTarget Targets="Delphi_Mocks_Tests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
     <ItemGroup Condition="'$(BuildGroup)'=='all'">
-        <BuildGroupProject Include="Sample1.dproj">
-            <ProjectGuid>{727F001F-F521-4E93-B237-F8C9E2E3450B}</ProjectGuid>
-            <Configurations>Debug;Release</Configurations>
-            <Platforms>Win32;Win64</Platforms>
-            <Enabled>False</Enabled>
-        </BuildGroupProject>
         <BuildGroupProject Include="Tests\Delphi.Mocks.Tests.dproj">
             <ProjectGuid>{09065B0C-BFB4-4C27-A57A-26E99D078545}</ProjectGuid>
             <Configurations>Debug;Release;TestInsight</Configurations>
