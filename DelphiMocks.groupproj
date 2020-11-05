@@ -3,6 +3,9 @@
         <ProjectGuid>{5B50C9A9-C667-497D-954F-FA8A2C43C41B}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
+        <Projects Include="Source\Delphi.Mocks.All.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="Tests\Delphi.Mocks.Tests.dproj">
             <Dependencies/>
         </Projects>
@@ -14,6 +17,15 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
+    <Target Name="Delphi_Mocks_All">
+        <MSBuild Projects="Source\Delphi.Mocks.All.dproj"/>
+    </Target>
+    <Target Name="Delphi_Mocks_All:Clean">
+        <MSBuild Projects="Source\Delphi.Mocks.All.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Delphi_Mocks_All:Make">
+        <MSBuild Projects="Source\Delphi.Mocks.All.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Delphi_Mocks_Tests">
         <MSBuild Projects="Tests\Delphi.Mocks.Tests.dproj"/>
     </Target>
@@ -24,16 +36,22 @@
         <MSBuild Projects="Tests\Delphi.Mocks.Tests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="Delphi_Mocks_Tests"/>
+        <CallTarget Targets="Delphi_Mocks_All;Delphi_Mocks_Tests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Delphi_Mocks_Tests:Clean"/>
+        <CallTarget Targets="Delphi_Mocks_All:Clean;Delphi_Mocks_Tests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Delphi_Mocks_Tests:Make"/>
+        <CallTarget Targets="Delphi_Mocks_All:Make;Delphi_Mocks_Tests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
     <ItemGroup Condition="'$(BuildGroup)'=='all'">
+        <BuildGroupProject Include="Source\Delphi.Mocks.All.dproj">
+            <ProjectGuid>{9BED57D8-CE94-47EB-9A56-400B4C0DA41F}</ProjectGuid>
+            <Configurations>Debug;Release;TestInsight</Configurations>
+            <Platforms>Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
         <BuildGroupProject Include="Tests\Delphi.Mocks.Tests.dproj">
             <ProjectGuid>{09065B0C-BFB4-4C27-A57A-26E99D078545}</ProjectGuid>
             <Configurations>Debug;Release;TestInsight</Configurations>
